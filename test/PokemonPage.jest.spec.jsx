@@ -1,10 +1,10 @@
-import React from 'react'
-import { render, screen } from '@testing-library/react'
-import { Router } from 'react-router-dom'
-import { createMemoryHistory } from 'history'
-import axiosMock from 'axios'
-import { act } from 'react-dom/test-utils'
 import '@testing-library/jest-dom/extend-expect'
+import { render, screen } from '@testing-library/react'
+import axiosMock from 'axios'
+import { createMemoryHistory } from 'history'
+import React from 'react'
+import { act } from 'react-dom/test-utils'
+import { Router } from 'react-router-dom'
 import PokemonPage from '../src/PokemonPage'
 
 jest.mock('axios')
@@ -14,6 +14,7 @@ const previous = {
   name: 'ditto',
   id: 132
 }
+
 const next = {
   url: 'https://pokeapi.co/api/v2/pokemon/134/',
   name: 'vaporeon',

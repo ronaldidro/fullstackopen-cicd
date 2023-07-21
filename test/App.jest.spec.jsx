@@ -1,8 +1,8 @@
-import React from 'react'
+import '@testing-library/jest-dom/extend-expect'
 import { render, screen } from '@testing-library/react'
 import axiosMock from 'axios'
+import React from 'react'
 import { act } from 'react-dom/test-utils'
-import '@testing-library/jest-dom/extend-expect'
 import App from '../src/App'
 
 jest.mock('axios')
@@ -16,26 +16,32 @@ describe('<App />', () => {
         }
       }
     )
+
     await act(async () => {
       render(<App />)
     })
+
     expect(axiosMock.get).toHaveBeenCalledTimes(1)
     expect(axiosMock.get).toHaveBeenCalledWith('https://pokeapi.co/api/v2/pokemon/?limit=50')
   })
 
   it('shows LoadingSpinner', async () => {
     axiosMock.get.mockResolvedValueOnce({})
+
     await act(async () => {
       const { getByAltText } = render(<App />)
+
       expect(getByAltText('Loading...')).toBeVisible()
     })
   })
 
   it('shows error', async () => {
     axiosMock.get.mockRejectedValueOnce(new Error())
+
     await act(async () => {
       render(<App />)
     })
+
     expect(screen.getByTestId('error')).toBeVisible()
   })
 })
