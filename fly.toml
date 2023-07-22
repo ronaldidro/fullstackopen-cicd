@@ -9,8 +9,6 @@ primary_region = "scl"
 [http_service]
   internal_port = 8080
   force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
   min_machines_running = 0
   processes = ["app"]
 
@@ -43,4 +41,3 @@ primary_region = "scl"
   restart_limit = 0
   timeout = 2000
   tls_skip_verify = false
-  [services.http_checks.headers]
