@@ -24,3 +24,13 @@ primary_region = "scl"
   http_checks = []
   internal_port = 8080 
   processes = ["app"]
+
+[deploy]
+  release_command = "npm run build"
+
+[processes]
+  app = "node app.js"
+
+[build]
+  [build.args]
+    NODE_VERSION = "16.13.2"
