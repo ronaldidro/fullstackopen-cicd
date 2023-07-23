@@ -21,12 +21,12 @@ jobs:
         run: npm run build
       - name: Frontend testing
         run: npm run test
-      # - name: e2e tests
-      #   uses: cypress-io/github-action@v5
-      #   with:
-      #     command: npm run test:e2e
-      #     start: npm run start
-      #     wait-on: http://localhost:5000
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start
+          wait-on: http://localhost:5000
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy to Fly
         run: flyctl deploy --remote-only
