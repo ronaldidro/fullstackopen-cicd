@@ -33,6 +33,22 @@ jobs:
       - name: Deploy to Render
         if: ${{ github.event_name == 'push' && !contains(toJson(join(github.event.commits.*.message)), '#skip') }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+      - name: Notify success on Discord
+          uses: rjstone/discord-webhook-notify@v1
+          if: ${{ success() }}
+          with:
+              severity: info
+              text: A new version of Pokedex deployed
+              details: to https://fso-cicd-epdo.onrender.com by ${{ toJson(github.event.commits.*.committer.name) }}
+              webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Notify failure on Discord
+          uses: rjstone/discord-webhook-notify@v1
+          if: ${{ failure() }}
+          with:
+              severity: error
+              text: Build failed
+              details: commit ${{ toJson(github.event.commits.*.url) }} by ${{ toJson(github.event.commits.*.committer.name) }} broke the build :(
+              webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
