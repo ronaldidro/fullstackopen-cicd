@@ -13,3 +13,7 @@ Start by running `npm install` inside the project folder
 `npm run eslint` to run eslint
 `npm run build` to make a production build
 `npm start` to run your production build
+
+## Exercises repository
+
+Repository for 11.20 and 11.21 exercises: [Blog App](https://github.com/ronaldidro/blogapp-cicd)
